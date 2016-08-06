@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on iblacksand</title>
+    <link>https://iblacksand.github.io/post/</link>
+    <description>Recent content in Posts on iblacksand</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Aug 2016 21:23:33 -0600</lastBuildDate>
+    <atom:link href="https://iblacksand.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>https://iblacksand.github.io/post/about/</link>
+      <pubDate>Fri, 05 Aug 2016 21:23:33 -0600</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/about/</guid>
+      <description>&lt;p&gt;Welcome to my website. My name is John Elizarraras. I am a high school student. Most of these projects are just things I work on for fun and probably have been created before. To view links please click on the blog post.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PyMathTools</title>
+      <link>https://iblacksand.github.io/post/PyMathTools/</link>
+      <pubDate>Sat, 06 Aug 2016 13:03:44 -0600</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/PyMathTools/</guid>
+      <description>&lt;p&gt;PyMathTools is a module writing in python. It has more functions that can be a substitute for &lt;a href=&#34;http://www.sagemath.org/&#34;&gt;sage&lt;/a&gt; and others. It is a lightweight solution for doing more advanced math. The repo is &lt;a href=&#34;https://github.com/iblacksand/PyMathTools&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>advanced planner</title>
+      <link>https://iblacksand.github.io/post/advanced-planner/</link>
+      <pubDate>Sat, 06 Aug 2016 13:03:30 -0600</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/advanced-planner/</guid>
+      <description>&lt;p&gt;This is my 20% project. It was originally a tool that would have special commands for the terminal but it just turned into a timing mechanism. You can view it &lt;a href=&#34;http://iblacksand.github.io/advanced-planner/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
