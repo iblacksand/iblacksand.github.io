@@ -17,10 +17,10 @@
       <guid>https://iblacksand.github.io/post/Cheatsheet/</guid>
       <description>
 
-&lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the value of the address with &lt;code&gt;A&lt;/code&gt; or the value stored at the memory slot  with &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values that you want to use later on.&lt;/p&gt;
+&lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the address with &lt;code&gt;A&lt;/code&gt; or the value stored at the memory slot  with &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values that you want to use later on.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@100
-D = A // A is the value of the address which is 100
+D = A // A is address which is 100
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;What this does is stores the address to &lt;code&gt;D&lt;/code&gt;, and since we called the address of &lt;code&gt;100&lt;/code&gt;, &lt;code&gt;D&lt;/code&gt; has a value of &lt;code&gt;100&lt;/code&gt;. If we want to assign a spot in memory, &lt;code&gt;i&lt;/code&gt;, with a value of &lt;code&gt;2220&lt;/code&gt; we can simply do this&lt;/p&gt;

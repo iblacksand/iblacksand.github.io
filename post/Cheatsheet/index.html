@@ -59,10 +59,10 @@
     <section class="post-content">
         
 
-<p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the value of the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
+<p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
 
 <pre><code>@100
-D = A // A is the value of the address which is 100
+D = A // A is address which is 100
 </code></pre>
 
 <p>What this does is stores the address to <code>D</code>, and since we called the address of <code>100</code>, <code>D</code> has a value of <code>100</code>. If we want to assign a spot in memory, <code>i</code>, with a value of <code>2220</code> we can simply do this</p>
