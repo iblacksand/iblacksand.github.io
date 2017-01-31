@@ -193,7 +193,7 @@ M = M + i
 
 &lt;p&gt;because &lt;code&gt;i&lt;/code&gt; is an address not a value so you have to store it in &lt;code&gt;D&lt;/code&gt;. You have to do this whenever you want to interact with two different addresses.&lt;/p&gt;
 
-&lt;p&gt;Note the infinite loop at the end. This means that the program is done and if you want something to just copy:&lt;/p&gt;
+&lt;p&gt;Note the infinite loop at the end. This means that the program is done.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;(ENDPROGRAM)
 @ENDPROGRAM
