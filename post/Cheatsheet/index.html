@@ -59,10 +59,10 @@
     <section class="post-content">
         
 
-<p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the address, with <code>A</code>, or the value stored at the memory slot <code>M</code> and use <code>D</code> to keep track of values.</p>
+<p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the value of the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
 
 <pre><code>@100
-D = A
+D = A // A is the value of the address which is 100
 </code></pre>
 
 <p>What this does is stores the address to <code>D</code>, and since we called the address of <code>100</code>, <code>D</code> has a value of <code>100</code>. If we want to assign a spot in memory, <code>i</code>, with a value of <code>2220</code> we can simply do this</p>
@@ -86,7 +86,7 @@ M = D // M is the value held at that memory point.
 0;JMP // this is a jump that will go to the label startLoop
 </code></pre>
 
-<p>As you can see labels are formatted like <code>(labelName)</code>. They will be useful later. Note that this something that you don&rsquo;t have to call a spot in memory with an <code>@</code>.</p>
+<p>As you can see labels are formatted like <code>(labelName)</code>. They will be useful later. Note that this something that you don&rsquo;t have to put an <code>@</code> before it.</p>
 
 <h2 id="jumps">Jumps</h2>
 
@@ -98,19 +98,27 @@ M = D // M is the value held at that memory point.
 They are declared with <code>JMP</code>. Here is an example</p>
 
 <pre><code>(toJumpTo)
-@toJumpTo //we put the label instead of a memory address and this tells where to jump
-0;JMP// put a 0 followed by ;JMP to jump to toJumpTo
+@toJumpTo //we put the label instead of a memory address and this shows where to jump
+0;JMP// put a 0 followed by ;JMP to jump
 
 </code></pre>
 
-<p>###Conditional Jumps</p>
+<p>The basic format is:</p>
 
-<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code>JMP</code> you would use different letters to for different conditions. The chart below demonstrates what keywords do what.</p>
+<pre><code>@labelToJumpTo
+0;JMP
+</code></pre>
+
+<p>These are useful to go back to the start of a loop.</p>
+
+<h3 id="conditional-jumps">Conditional Jumps</h3>
+
+<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code>JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
 
 <table>
 <thead>
 <tr>
-<th>Instruction</th>
+<th>Instruction(code)</th>
 <th>Jump Condition</th>
 <th>Jumps when</th>
 </tr>
@@ -155,7 +163,7 @@ They are declared with <code>JMP</code>. Here is an example</p>
 </tbody>
 </table>
 
-<p>There are more of these jumps and they pretty easy to guess.</p>
+<p>There are more but this is the basics that you should need.</p>
 
 <p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&rsquo;s say <code>D</code> has a value of <code>12</code>.</p>
 
@@ -170,14 +178,14 @@ D = M //stores the value of i at D
 @100
 D = D - A //subtracts 100 from D
 @jumpIfLess
-D;JLT // Sees if D is less than 
+D;JLT // Sees if D is less than 0
 </code></pre>
 
-<p>If <code>i</code> is less than <code>100</code> and we subtract <code>100</code> away, it would be negative. So we want to jump if the number is negative which is the same as less than <code>0</code>. We can just change <code>JLT</code> to <code>JGT</code> if we want to jump if <code>i</code> is greater than <code>100</code>.</p>
+<p>If <code>i</code> is less than <code>100</code> and we subtract <code>100</code> away, it would be negative. So we want to jump if the <code>D</code> is negative which is the same as less than <code>0</code>. We can just change <code>JLT</code> to <code>JGT</code> if we want to jump if <code>i</code> is greater than <code>100</code>.</p>
 
 <p>If the condition is not met it continues down the code as normal.</p>
 
-<p>You can use any of these jump and if you want to learn more jumps you can see them <a href="https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html">here</a>.</p>
+<p>You can use any of these jumps and if you want to learn more jumps you can see them <a href="https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html">here</a> or <a href="http://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm">here</a>.</p>
 
 <h2 id="loops">Loops</h2>
 
@@ -187,7 +195,7 @@ D;JLT // Sees if D is less than
 for(int i = 1; i &lt;= 100; i++){
 	sum += i;
 }
-return sum
+return sum;
 </code></pre>
 
 <p>This adds all of the numbers from 1 to 100</p>
@@ -201,21 +209,21 @@ M = 0 //sets our sum to 0
 
 (LOOP) // label for the start of the loop
 	@i
-	D = M //stores the value of i to D to use to compare to 100
+	D = M //stores the value of i to D
 	@100
-	D = D - A // subtracts off 100
+	D = D - A // subtracts off 100 from D
 	@END // Label of the end of the loop
 	D;JGT // if i - 100 is positive we need to end the loop
 	@i
-	D = M //restore the value at i to D
+	D = M //restores the value of D to i
 	@sum
-	M = M + D // sum adds the value of i
+	M = M + D // adds the value of i to D
 	@i
 	M = M + 1 //increases the value of i by 1
 	@LOOP
 	0;JMP //jumps back to the start of the loop
 (END) // Our label for the end
-@End
+@END
 0;JMP //Infinite loop to end the program
 </code></pre>
 
@@ -225,7 +233,7 @@ M = 0 //sets our sum to 0
 M = M + i
 </code></pre>
 
-<p>because <code>i</code> is an address not a value so you have to store it in <code>D</code>.</p>
+<p>because <code>i</code> is an address not a value so you have to store it in <code>D</code>. You have to do this whenever you want to interact with two different addresses.</p>
 
 <p>Note the infinite loop at the end. This means that the program is done and if you want something to just copy:</p>
 
@@ -234,7 +242,7 @@ M = M + i
 0;JMP
 </code></pre>
 
-<p>Just copy this to the last line of your code.</p>
+<p>Just copy this to the last line of your code and the CPU will stop running.</p>
 
 <h2 id="cheatsheet">Cheatsheet</h2>
 

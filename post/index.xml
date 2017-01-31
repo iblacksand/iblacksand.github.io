@@ -17,10 +17,10 @@
       <guid>https://iblacksand.github.io/post/Cheatsheet/</guid>
       <description>
 
-&lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the address, with &lt;code&gt;A&lt;/code&gt;, or the value stored at the memory slot &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values.&lt;/p&gt;
+&lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the value of the address with &lt;code&gt;A&lt;/code&gt; or the value stored at the memory slot  with &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values that you want to use later on.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@100
-D = A
+D = A // A is the value of the address which is 100
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;What this does is stores the address to &lt;code&gt;D&lt;/code&gt;, and since we called the address of &lt;code&gt;100&lt;/code&gt;, &lt;code&gt;D&lt;/code&gt; has a value of &lt;code&gt;100&lt;/code&gt;. If we want to assign a spot in memory, &lt;code&gt;i&lt;/code&gt;, with a value of &lt;code&gt;2220&lt;/code&gt; we can simply do this&lt;/p&gt;
@@ -44,7 +44,7 @@ M = D // M is the value held at that memory point.
 0;JMP // this is a jump that will go to the label startLoop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;As you can see labels are formatted like &lt;code&gt;(labelName)&lt;/code&gt;. They will be useful later. Note that this something that you don&amp;rsquo;t have to call a spot in memory with an &lt;code&gt;@&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As you can see labels are formatted like &lt;code&gt;(labelName)&lt;/code&gt;. They will be useful later. Note that this something that you don&amp;rsquo;t have to put an &lt;code&gt;@&lt;/code&gt; before it.&lt;/p&gt;
 
 &lt;h2 id=&#34;jumps&#34;&gt;Jumps&lt;/h2&gt;
 
@@ -56,19 +56,27 @@ M = D // M is the value held at that memory point.
 They are declared with &lt;code&gt;JMP&lt;/code&gt;. Here is an example&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;(toJumpTo)
-@toJumpTo //we put the label instead of a memory address and this tells where to jump
-0;JMP// put a 0 followed by ;JMP to jump to toJumpTo
+@toJumpTo //we put the label instead of a memory address and this shows where to jump
+0;JMP// put a 0 followed by ;JMP to jump
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;###Conditional Jumps&lt;/p&gt;
+&lt;p&gt;The basic format is:&lt;/p&gt;
 
-&lt;p&gt;Conditional jumps will only jump to the label if a condition is met. Instead of &lt;code&gt;JMP&lt;/code&gt; you would use different letters to for different conditions. The chart below demonstrates what keywords do what.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@labelToJumpTo
+0;JMP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These are useful to go back to the start of a loop.&lt;/p&gt;
+
+&lt;h3 id=&#34;conditional-jumps&#34;&gt;Conditional Jumps&lt;/h3&gt;
+
+&lt;p&gt;Conditional jumps will only jump to the label if a condition is met. Instead of &lt;code&gt;JMP&lt;/code&gt; you would use different letters for different conditions. The chart below shows the different types of conditions.&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Instruction&lt;/th&gt;
+&lt;th&gt;Instruction(code)&lt;/th&gt;
 &lt;th&gt;Jump Condition&lt;/th&gt;
 &lt;th&gt;Jumps when&lt;/th&gt;
 &lt;/tr&gt;
@@ -113,7 +121,7 @@ They are declared with &lt;code&gt;JMP&lt;/code&gt;. Here is an example&lt;/p&gt
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;There are more of these jumps and they pretty easy to guess.&lt;/p&gt;
+&lt;p&gt;There are more but this is the basics that you should need.&lt;/p&gt;
 
 &lt;p&gt;Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&amp;rsquo;s say &lt;code&gt;D&lt;/code&gt; has a value of &lt;code&gt;12&lt;/code&gt;.&lt;/p&gt;
 
@@ -128,14 +136,14 @@ D = M //stores the value of i at D
 @100
 D = D - A //subtracts 100 from D
 @jumpIfLess
-D;JLT // Sees if D is less than 
+D;JLT // Sees if D is less than 0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If &lt;code&gt;i&lt;/code&gt; is less than &lt;code&gt;100&lt;/code&gt; and we subtract &lt;code&gt;100&lt;/code&gt; away, it would be negative. So we want to jump if the number is negative which is the same as less than &lt;code&gt;0&lt;/code&gt;. We can just change &lt;code&gt;JLT&lt;/code&gt; to &lt;code&gt;JGT&lt;/code&gt; if we want to jump if &lt;code&gt;i&lt;/code&gt; is greater than &lt;code&gt;100&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;i&lt;/code&gt; is less than &lt;code&gt;100&lt;/code&gt; and we subtract &lt;code&gt;100&lt;/code&gt; away, it would be negative. So we want to jump if the &lt;code&gt;D&lt;/code&gt; is negative which is the same as less than &lt;code&gt;0&lt;/code&gt;. We can just change &lt;code&gt;JLT&lt;/code&gt; to &lt;code&gt;JGT&lt;/code&gt; if we want to jump if &lt;code&gt;i&lt;/code&gt; is greater than &lt;code&gt;100&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If the condition is not met it continues down the code as normal.&lt;/p&gt;
 
-&lt;p&gt;You can use any of these jump and if you want to learn more jumps you can see them &lt;a href=&#34;https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can use any of these jumps and if you want to learn more jumps you can see them &lt;a href=&#34;https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html&#34;&gt;here&lt;/a&gt; or &lt;a href=&#34;http://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;loops&#34;&gt;Loops&lt;/h2&gt;
 
@@ -145,7 +153,7 @@ D;JLT // Sees if D is less than
 for(int i = 1; i &amp;lt;= 100; i++){
 	sum += i;
 }
-return sum
+return sum;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This adds all of the numbers from 1 to 100&lt;/p&gt;
@@ -159,21 +167,21 @@ M = 0 //sets our sum to 0
 
 (LOOP) // label for the start of the loop
 	@i
-	D = M //stores the value of i to D to use to compare to 100
+	D = M //stores the value of i to D
 	@100
-	D = D - A // subtracts off 100
+	D = D - A // subtracts off 100 from D
 	@END // Label of the end of the loop
 	D;JGT // if i - 100 is positive we need to end the loop
 	@i
-	D = M //restore the value at i to D
+	D = M //restores the value of D to i
 	@sum
-	M = M + D // sum adds the value of i
+	M = M + D // adds the value of i to D
 	@i
 	M = M + 1 //increases the value of i by 1
 	@LOOP
 	0;JMP //jumps back to the start of the loop
 (END) // Our label for the end
-@End
+@END
 0;JMP //Infinite loop to end the program
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -183,7 +191,7 @@ M = 0 //sets our sum to 0
 M = M + i
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;because &lt;code&gt;i&lt;/code&gt; is an address not a value so you have to store it in &lt;code&gt;D&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;because &lt;code&gt;i&lt;/code&gt; is an address not a value so you have to store it in &lt;code&gt;D&lt;/code&gt;. You have to do this whenever you want to interact with two different addresses.&lt;/p&gt;
 
 &lt;p&gt;Note the infinite loop at the end. This means that the program is done and if you want something to just copy:&lt;/p&gt;
 
@@ -192,7 +200,7 @@ M = M + i
 0;JMP
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Just copy this to the last line of your code.&lt;/p&gt;
+&lt;p&gt;Just copy this to the last line of your code and the CPU will stop running.&lt;/p&gt;
 
 &lt;h2 id=&#34;cheatsheet&#34;&gt;Cheatsheet&lt;/h2&gt;
 
