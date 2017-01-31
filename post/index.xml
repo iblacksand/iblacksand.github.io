@@ -173,7 +173,7 @@ M = 0 //sets our sum to 0
 	@END // Label of the end of the loop
 	D;JGT // if i - 100 is positive we need to end the loop
 	@i
-	D = M //restores the value of D to i
+	D = M //restores the value of i to D
 	@sum
 	M = M + D // adds the value of i to D
 	@i
