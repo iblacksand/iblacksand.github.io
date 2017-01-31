@@ -6,8 +6,226 @@
     <description>Recent content on iblacksand</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Aug 2016 21:23:33 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jan 2017 18:48:38 -0700</lastBuildDate>
     <atom:link href="https://iblacksand.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Assembly Cheatsheet</title>
+      <link>https://iblacksand.github.io/post/Cheatsheet/</link>
+      <pubDate>Mon, 30 Jan 2017 18:48:38 -0700</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/Cheatsheet/</guid>
+      <description>
+
+&lt;h1 id=&#34;assembly-cheatsheet&#34;&gt;Assembly Cheatsheet&lt;/h1&gt;
+
+&lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the address, with &lt;code&gt;A&lt;/code&gt;, or the value stored at the memory slot &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@100
+D = A
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What this does is stores the address to &lt;code&gt;D&lt;/code&gt;, and since we called the address of &lt;code&gt;100&lt;/code&gt;, &lt;code&gt;D&lt;/code&gt; has a value of &lt;code&gt;100&lt;/code&gt;. If we want to assign a spot in memory, &lt;code&gt;i&lt;/code&gt;, with a value of &lt;code&gt;2220&lt;/code&gt; we can simply do this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@2220
+D = A // first we have to assign D with the value of 2220
+@i 
+M = D // M is the value held at that memory point.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;i&lt;/code&gt; is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address.&lt;/p&gt;
+
+&lt;p&gt;Address names don&amp;rsquo;t have to be capitalized, but to be safe, capitalize &lt;code&gt;M&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;D&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;labels&#34;&gt;Labels&lt;/h2&gt;
+
+&lt;p&gt;Labels are spots in code that are used to tell where to jump to. &lt;a href=&#34;#Jumps&#34;&gt;Jumps&lt;/a&gt; are mentioned later on but here is an example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(startLoop) //this is the label
+@startLoop
+0;JMP // this is a jump that will go to the label startLoop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see labels are formatted like &lt;code&gt;(labelName)&lt;/code&gt;. They will be useful later. Note that this something that you don&amp;rsquo;t have to call a spot in memory with an &lt;code&gt;@&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;jumps&#34;&gt;Jumps&lt;/h2&gt;
+
+&lt;p&gt;Jumps are used to go to a label as shown before. They can go back or forward in code. There are two types of jumps, unconditional and conditional.&lt;/p&gt;
+
+&lt;h3 id=&#34;unconditional-jumps&#34;&gt;Unconditional Jumps&lt;/h3&gt;
+
+&lt;p&gt;As the name says, these will jump to the label no matter what.
+They are declared with &lt;code&gt;JMP&lt;/code&gt;. Here is an example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(toJumpTo)
+@toJumpTo //we put the label instead of a memory address and this tells where to jump
+0;JMP// put a 0 followed by ;JMP to jump to toJumpTo
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###Conditional Jumps&lt;/p&gt;
+
+&lt;p&gt;Conditional jumps will only jump to the label if a condition is met. Instead of &lt;code&gt;JMP&lt;/code&gt; you would use different letters to for different conditions. The chart below demonstrates what keywords do what.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Instruction&lt;/th&gt;
+&lt;th&gt;Jump Condition&lt;/th&gt;
+&lt;th&gt;Jumps when&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;JE&lt;/td&gt;
+&lt;td&gt;Jump if Equal&lt;/td&gt;
+&lt;td&gt;Equals 0&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;JNE&lt;/td&gt;
+&lt;td&gt;Jump if Not Equal&lt;/td&gt;
+&lt;td&gt;Doesn&amp;rsquo;t Equal Zero&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;JGT&lt;/td&gt;
+&lt;td&gt;Jump if Greater&lt;/td&gt;
+&lt;td&gt;Greater than 0&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;JGE&lt;/td&gt;
+&lt;td&gt;Jump if Greater or Equal&lt;/td&gt;
+&lt;td&gt;Greater or equal to 0&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;JLT&lt;/td&gt;
+&lt;td&gt;Jump if Less&lt;/td&gt;
+&lt;td&gt;Less than 0&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;JLE&lt;/td&gt;
+&lt;td&gt;Jump if Less or Equal&lt;/td&gt;
+&lt;td&gt;Less than or equal to 0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;There are more of these jumps and they pretty easy to guess.&lt;/p&gt;
+
+&lt;p&gt;Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&amp;rsquo;s say &lt;code&gt;D&lt;/code&gt; has a value of &lt;code&gt;12&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@someLabel
+D; JLE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;this won&amp;rsquo;t jump as &lt;code&gt;D&lt;/code&gt;, &lt;code&gt;12&lt;/code&gt;, is not less than or equal to &lt;code&gt;0&lt;/code&gt;. If we want to check if some address &lt;code&gt;i&lt;/code&gt; is less than &lt;code&gt;100&lt;/code&gt; we can do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@i
+D = M //stores the value of i at D
+@100
+D = D - A //subtracts 100 from D
+@jumpIfLess
+D;JLT // Sees if D is less than 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If &lt;code&gt;i&lt;/code&gt; is less than &lt;code&gt;100&lt;/code&gt; and we subtract &lt;code&gt;100&lt;/code&gt; away, it would be negative. So we want to jump if the number is negative which is the same as less than &lt;code&gt;0&lt;/code&gt;. We can just change &lt;code&gt;JLT&lt;/code&gt; to &lt;code&gt;JGT&lt;/code&gt; if we want to jump if &lt;code&gt;i&lt;/code&gt; is greater than &lt;code&gt;100&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If the condition is not met it continues down the code as normal.&lt;/p&gt;
+
+&lt;p&gt;You can use any of these jump and if you want to learn more jumps you can see them &lt;a href=&#34;https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;loops&#34;&gt;Loops&lt;/h2&gt;
+
+&lt;p&gt;To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int sum = 0;
+for(int i = 1; i &amp;lt;= 100; i++){
+	sum += i;
+}
+return sum
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This adds all of the numbers from 1 to 100&lt;/p&gt;
+
+&lt;p&gt;The equivalent of this in assembly is as follows&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@i
+M = 1 //Sets i to 1
+@sum
+M = 0 //sets our sum to 0
+
+(LOOP) // label for the start of the loop
+	@i
+	D = M //stores the value of i to D to use to compare to 100
+	@100
+	D = D - A // subtracts off 100
+	@END // Label of the end of the loop
+	D;JGT // if i - 100 is positive we need to end the loop
+	@i
+	D = M //restore the value at i to D
+	@sum
+	M = M + D // sum adds the value of i
+	@i
+	M = M + 1 //increases the value of i by 1
+	@LOOP
+	0;JMP //jumps back to the start of the loop
+(END) // Our label for the end
+@End
+0;JMP //Infinite loop to end the program
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We have to store the value of &lt;code&gt;i&lt;/code&gt; to &lt;code&gt;D&lt;/code&gt; whenever we want to add to &lt;code&gt;sum&lt;/code&gt; because we can&amp;rsquo;t just do&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@sum
+M = M + i
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;because &lt;code&gt;i&lt;/code&gt; is an address not a value so you have to store it in &lt;code&gt;D&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note the infinite loop at the end. This means that the program is done and if you want something to just copy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(ENDPROGRAM)
+@ENDPROGRAM
+0;JMP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just copy this to the last line of your code.&lt;/p&gt;
+
+&lt;h2 id=&#34;cheatsheet&#34;&gt;Cheatsheet&lt;/h2&gt;
+
+&lt;p&gt;I found that editing the while loop helped a lot for Mult so here it is without the comments.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@i
+M = 1
+@sum
+M = 0
+
+(LOOP)
+    @i
+    D = M
+    @100
+    D = D - A
+    @END
+    D;JGT
+    @i
+    D = M
+    @sum
+    M = M + D
+    @i
+    M = M + 1
+    @LOOP
+    0;JMP
+(END)
+@End
+0;JMP
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>About Me</title>
