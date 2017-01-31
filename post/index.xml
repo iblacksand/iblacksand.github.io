@@ -17,8 +17,6 @@
       <guid>https://iblacksand.github.io/post/Cheatsheet/</guid>
       <description>
 
-&lt;h1 id=&#34;assembly-cheatsheet&#34;&gt;Assembly Cheatsheet&lt;/h1&gt;
-
 &lt;p&gt;Every assembly action must start with an &lt;code&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&#34;#labels&#34;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code&gt;@1&lt;/code&gt; references the address &lt;code&gt;1&lt;/code&gt; and you can access the address, with &lt;code&gt;A&lt;/code&gt;, or the value stored at the memory slot &lt;code&gt;M&lt;/code&gt; and use &lt;code&gt;D&lt;/code&gt; to keep track of values.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@100
