@@ -31,10 +31,10 @@ D = M //stores R0 at D
 
 &lt;h2 id=&#34;fill&#34;&gt;Fill&lt;/h2&gt;
 
-&lt;p&gt;Fill is supposed to fill the screen with black when a key is pressed. There is a position in memory, &lt;code&gt;@SCREEN&lt;/code&gt;, that holds the values for the color of the screen. &lt;code&gt;@SCREEN&lt;/code&gt; is the position of the first pixel of the screen. If a pixel holds a value of &lt;code&gt;1&lt;/code&gt; this will make the pixel black. Otherwise it is white. It is possible to change 16 pixels assigning one position with one number. If you assign &lt;code&gt;@SCREEN&lt;/code&gt; to have a value of &lt;code&gt;-1&lt;/code&gt;, which is &lt;code&gt;1111111111111111&lt;/code&gt; in binary, it will turn the first 16 pixels black.&lt;/p&gt;
+&lt;p&gt;Fill is supposed to fill the screen with black when a key is pressed.  A block of 16 pixels is consider a &lt;strong&gt;word&lt;/strong&gt;. &lt;code&gt;@SCREEN&lt;/code&gt; is the position of the first word of the screen. If a pixel holds a value of &lt;code&gt;1&lt;/code&gt; this will make the pixel black. Otherwise it is white.If you assign a word to have a value of &lt;code&gt;-1&lt;/code&gt;, which is &lt;code&gt;1111111111111111&lt;/code&gt; in binary, it will turn the first 16 pixels black.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@SCREEN
-M = -1
+M = -1 // this is referencing the first word
 (END)
 @END
 0;JMP
@@ -42,7 +42,9 @@ M = -1
 
 &lt;p&gt;This will make the first 16 pixels black and is a good test script to make sure you that you have the write steps to run your program.&lt;/p&gt;
 
-&lt;p&gt;A block of 16 pixels is consider a &lt;strong&gt;word&lt;/strong&gt;. The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of &lt;code&gt;-1&lt;/code&gt;. To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is &lt;code&gt;@24576&lt;/code&gt;. If the value doesn&amp;rsquo;t equal zero at that memory position then a key is currently pressed.&lt;/p&gt;
+&lt;p&gt;The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of &lt;code&gt;-1&lt;/code&gt;. Start with &lt;code&gt;@SCREEN&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is &lt;code&gt;@24576&lt;/code&gt;. If the value doesn&amp;rsquo;t equal zero at that memory position then a key is currently pressed.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@24576 // memory address of the keyboard.
 D = M

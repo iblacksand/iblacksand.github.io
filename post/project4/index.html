@@ -73,10 +73,10 @@ D = M //stores R0 at D
 
 <h2 id="fill">Fill</h2>
 
-<p>Fill is supposed to fill the screen with black when a key is pressed. There is a position in memory, <code>@SCREEN</code>, that holds the values for the color of the screen. <code>@SCREEN</code> is the position of the first pixel of the screen. If a pixel holds a value of <code>1</code> this will make the pixel black. Otherwise it is white. It is possible to change 16 pixels assigning one position with one number. If you assign <code>@SCREEN</code> to have a value of <code>-1</code>, which is <code>1111111111111111</code> in binary, it will turn the first 16 pixels black.</p>
+<p>Fill is supposed to fill the screen with black when a key is pressed.  A block of 16 pixels is consider a <strong>word</strong>. <code>@SCREEN</code> is the position of the first word of the screen. If a pixel holds a value of <code>1</code> this will make the pixel black. Otherwise it is white.If you assign a word to have a value of <code>-1</code>, which is <code>1111111111111111</code> in binary, it will turn the first 16 pixels black.</p>
 
 <pre><code>@SCREEN
-M = -1
+M = -1 // this is referencing the first word
 (END)
 @END
 0;JMP
@@ -84,7 +84,9 @@ M = -1
 
 <p>This will make the first 16 pixels black and is a good test script to make sure you that you have the write steps to run your program.</p>
 
-<p>A block of 16 pixels is consider a <strong>word</strong>. The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of <code>-1</code>. To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is <code>@24576</code>. If the value doesn&rsquo;t equal zero at that memory position then a key is currently pressed.</p>
+<p>The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of <code>-1</code>. Start with <code>@SCREEN</code></p>
+
+<p>To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is <code>@24576</code>. If the value doesn&rsquo;t equal zero at that memory position then a key is currently pressed.</p>
 
 <pre><code>@24576 // memory address of the keyboard.
 D = M
