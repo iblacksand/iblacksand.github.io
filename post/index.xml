@@ -6,8 +6,61 @@
     <description>Recent content in Posts on iblacksand</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jan 2017 18:48:38 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 01 Feb 2017 08:52:46 -0700</lastBuildDate>
     <atom:link href="https://iblacksand.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Project 4</title>
+      <link>https://iblacksand.github.io/post/project4/</link>
+      <pubDate>Wed, 01 Feb 2017 08:52:46 -0700</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/project4/</guid>
+      <description>
+
+&lt;p&gt;Project 4 has two files, &lt;code&gt;Mult.asm&lt;/code&gt; and &lt;code&gt;Fill.asm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;mult&#34;&gt;Mult&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Mult.asm&lt;/code&gt; is multiplication. You have to do &lt;code&gt;R0 * R1&lt;/code&gt; and put that in &lt;code&gt;R2&lt;/code&gt;. It is important to note to get the value at &lt;code&gt;R0&lt;/code&gt; you would do&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@0
+D = M //stores R0 at D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The memory address is not &lt;code&gt;R0&lt;/code&gt; but &lt;code&gt;0&lt;/code&gt;.  Remember that you have to put an infinite loop at the end to say that the program is finished. It shouldn&amp;rsquo;t be too difficult.&lt;/p&gt;
+
+&lt;h2 id=&#34;fill&#34;&gt;Fill&lt;/h2&gt;
+
+&lt;p&gt;Fill is supposed to fill the screen with black when a key is pressed. There is a position in memory, &lt;code&gt;@SCREEN&lt;/code&gt;, that holds the values for the color of the screen. &lt;code&gt;@SCREEN&lt;/code&gt; is the position of the first pixel of the screen. If a pixel holds a value of &lt;code&gt;1&lt;/code&gt; this will make the pixel black. Otherwise it is white. It is possible to change 16 pixels assigning one position with one number. If you assign &lt;code&gt;@SCREEN&lt;/code&gt; to have a value of &lt;code&gt;-1&lt;/code&gt;, which is &lt;code&gt;1111111111111111&lt;/code&gt; in binary, it will turn the first 16 pixels black.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@SCREEN
+M = -1
+(END)
+@END
+0;JMP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will make the first 16 pixels black and is a good test script to make sure you that you have the write steps to run your program.&lt;/p&gt;
+
+&lt;p&gt;A block of 16 pixels is consider a &lt;strong&gt;word&lt;/strong&gt;. The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of &lt;code&gt;-1&lt;/code&gt;. To tell if you need to fill the screen, you have to tell if key is pressed. This is simple as getting the value at the keyboard address which is &lt;code&gt;@24576&lt;/code&gt;. If the value doesn&amp;rsquo;t equal zero at that memory position then a key is currently pressed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@24576 // memory address of the keyboard.
+D = M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;D has the value of the key being pressed. It is 0 if not key is pressed.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;All of this is given in the book. I wanted to make it easier for people to get what it is saying.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;testing-and-compiling&#34;&gt;Testing and Compiling&lt;/h2&gt;
+
+&lt;p&gt;To compile your &lt;code&gt;*.asm&lt;/code&gt; file, run &lt;code&gt;assembler.bat&lt;/code&gt; or &lt;code&gt;.sh&lt;/code&gt; and then click load source file on the very left. If you press the blue arrows it will compile it slowly so to get it done quickly press the while paper with numbers on it(directly left of the equals sign). The save icon next to the open file should turn blue and you can click on it and save it.&lt;/p&gt;
+
+&lt;p&gt;Next run &lt;code&gt;CPUEmulator.bat&lt;/code&gt; or &lt;code&gt;.sh&lt;/code&gt;. For &lt;code&gt;Mult&lt;/code&gt; you can click on the script button, the same as in HardwareSimulator and run the test file. For &lt;code&gt;Fill&lt;/code&gt; you will have to press the open file on the very left and open &lt;code&gt;Fill.hack&lt;/code&gt; in the &lt;code&gt;/Fill&lt;/code&gt; folder. Next on the right, set animations to no animations. Then set view to screen. Click on the keyboard button on the bottom and then you can press any key, other than ctrl and some modifier buttons, and see the results. An error of &lt;code&gt;At line 32XXX: Can&#39;t continue past last line&lt;/code&gt; usually means that you forgot  to end the program with an infinite loop.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;It is important to not that sometimes the assembler might bug out with overwriting so you might want to delete the &lt;code&gt;.hack&lt;/code&gt; file and then save&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Assembly Cheatsheet</title>
@@ -44,7 +97,7 @@ M = D // M is the value held at that memory point.
 0;JMP // this is a jump that will go to the label startLoop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;As you can see labels are formatted like &lt;code&gt;(labelName)&lt;/code&gt;. They will be useful later. Note that this something that you don&amp;rsquo;t have to put an &lt;code&gt;@&lt;/code&gt; before it.&lt;/p&gt;
+&lt;p&gt;As you can see labels are formatted like &lt;code&gt;(labelName)&lt;/code&gt;. They will be useful later. Note that this is something that you don&amp;rsquo;t have to put an &lt;code&gt;@&lt;/code&gt; before.&lt;/p&gt;
 
 &lt;h2 id=&#34;jumps&#34;&gt;Jumps&lt;/h2&gt;
 
