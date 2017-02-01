@@ -42,7 +42,7 @@ M = -1
 
 &lt;p&gt;This will make the first 16 pixels black and is a good test script to make sure you that you have the write steps to run your program.&lt;/p&gt;
 
-&lt;p&gt;A block of 16 pixels is consider a &lt;strong&gt;word&lt;/strong&gt;. The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of &lt;code&gt;-1&lt;/code&gt;. To tell if you need to fill the screen, you have to tell if key is pressed. This is simple as getting the value at the keyboard address which is &lt;code&gt;@24576&lt;/code&gt;. If the value doesn&amp;rsquo;t equal zero at that memory position then a key is currently pressed.&lt;/p&gt;
+&lt;p&gt;A block of 16 pixels is consider a &lt;strong&gt;word&lt;/strong&gt;. The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of &lt;code&gt;-1&lt;/code&gt;. To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is &lt;code&gt;@24576&lt;/code&gt;. If the value doesn&amp;rsquo;t equal zero at that memory position then a key is currently pressed.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;@24576 // memory address of the keyboard.
 D = M
