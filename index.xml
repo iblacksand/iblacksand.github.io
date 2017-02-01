@@ -48,7 +48,7 @@ M = -1
 D = M
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;D has the value of the key being pressed. It is 0 if not key is pressed.&lt;/p&gt;
+&lt;p&gt;D has the value of the key being pressed. It is 0 if no key is pressed.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;All of this is given in the book. I wanted to make it easier for people to get what it is saying.&lt;/em&gt;&lt;/p&gt;
 
