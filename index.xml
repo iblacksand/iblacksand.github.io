@@ -6,8 +6,44 @@
     <description>Recent content on iblacksand</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2017 08:52:46 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 22 Mar 2017 17:54:08 -0600</lastBuildDate>
     <atom:link href="https://iblacksand.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Connexus Safeguard</title>
+      <link>https://iblacksand.github.io/post/ConnexusSafeguard/</link>
+      <pubDate>Wed, 22 Mar 2017 17:54:08 -0600</pubDate>
+      
+      <guid>https://iblacksand.github.io/post/ConnexusSafeguard/</guid>
+      <description>
+
+&lt;p&gt;Connexus Safeguard is protection against accidently refreshes or moving to a different page while taking a test, quiz or reading through a lesson.&lt;/p&gt;
+
+&lt;p&gt;Whenever moving to a new page or changing lessons an alert will appear to confirm that you do indeed want to leave the page.&lt;/p&gt;
+
+&lt;h3 id=&#34;features&#34;&gt;Features:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Stops accidental refreshes which may cause you to lose all of your work&lt;/li&gt;
+&lt;li&gt;Only will alert of leaving page while in a class&lt;/li&gt;
+&lt;li&gt;Works on lesson links as well&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;installing&#34;&gt;Installing&lt;/h3&gt;
+
+&lt;p&gt;In order to install you will need to use some extension in order to run the userscript. I recommend &lt;a href=&#34;https://tampermonkey.net/&#34;&gt;TamperMonkey&lt;/a&gt;. An alertnative is &lt;a href=&#34;https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/&#34;&gt;GreaseMonkey&lt;/a&gt; but this is only for firefox. Tampermonkey works with  Chrome, Microsoft Edge, Safari, Opera Next, and Firefox.&lt;/p&gt;
+
+&lt;p&gt;Once you got this extension installed you can download the script here:&lt;/p&gt;
+
+&lt;h6 id=&#34;download-https-github-com-iblacksand-connexussafeguard-raw-master-connexussafeguard-user-js&#34;&gt;&lt;a href=&#34;https://github.com/iblacksand/ConnexusSafeguard/raw/master/ConnexusSafeguard.user.js&#34;&gt;DOWNLOAD&lt;/a&gt;&lt;/h6&gt;
+
+&lt;p&gt;To update just click the update scripts button on your extension.&lt;/p&gt;
+
+&lt;p&gt;To remove use your extension to delete or uninstall the script.&lt;/p&gt;
+
+&lt;p&gt;The repo for this is at &lt;a href=&#34;https://github.com/iblacksand/ConnexusSafeguard&#34;&gt;https://github.com/iblacksand/ConnexusSafeguard&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Project 4</title>
@@ -295,6 +331,8 @@ M = 0
       
       <guid>https://iblacksand.github.io/post/about/</guid>
       <description>&lt;p&gt;Welcome to my website. My name is John Elizarraras. I am a high school student. Most of these projects are just things I work on for fun and probably have been created before. To view links please click on the blog post.&lt;/p&gt;
+
+&lt;p&gt;Jai is dumb.&lt;/p&gt;
 </description>
     </item>
     
