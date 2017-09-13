@@ -1,11 +1,17 @@
 <html>
 <body>
-	<object width="window.innerWidth" height="window.innerHeight">
+	<object id="object" width="window.innerWidth" height="window.innerHeight">
 
-<embed src="https://www.math.uri.edu/~bkaskosz/flashmo/contours/contours.swf" width="550" height="400">
+<embed id="em" src="https://www.math.uri.edu/~bkaskosz/flashmo/contours/contours.swf" width="550" height="400">
 
 </embed>
 
 </object>
+<script type="text/javascript">
+	document.getElementById('object').width = window.innerWidth;
+	document.getElementById('object').height = window.innerHeight;
+	document.getElementById('em').width = window.innerWidth;
+	document.getElementById('em').height = window.innerHeight;
+</script>
 </body>
 </html>
