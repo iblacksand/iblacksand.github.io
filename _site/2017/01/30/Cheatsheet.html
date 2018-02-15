@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Assembly Cheatsheet</title>
+  <meta name="description" content="Every assembly action must start with an @ which is to followed by a memory address or label and then followed by code to modify something. For example, @1 r...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://iblacksand.github.io/2017/01/30/Cheatsheet.html">
+  <link rel="alternate" type="application/rss+xml" title="iblacksand" href="https://iblacksand.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">iblacksand</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Assembly Cheatsheet</h1>
+    <p class="post-meta"><time datetime="2017-01-30T00:00:00-07:00" itemprop="datePublished">Jan 30, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@100
+D = A // A is address which is 100
+</code></pre></div>
+<p>What this does is stores the address to <code>D</code>, and since we called the address of <code>100</code>, <code>D</code> has a value of <code>100</code>. If we want to assign a spot in memory, <code>i</code>, with a value of <code>2220</code> we can simply do this
+<code>
+@2220
+D = A // first we have to assign D with the value of 2220
+@i 
+M = D // M is the value held at that memory point.
+</code></p>
+
+<p><code>i</code> is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address. </p>
+
+<p>Address names don&#39;t have to be capitalized, but to be safe, capitalize <code>M</code>, <code>A</code> and <code>D</code>.</p>
+
+<h2>Labels</h2>
+
+<p>Labels are spots in code that are used to tell where to jump to. <a href="#Jumps">Jumps</a> are mentioned later on but here is an example
+<code>
+(startLoop) //this is the label
+@startLoop
+0;JMP // this is a jump that will go to the label startLoop
+</code></p>
+
+<p>As you can see labels are formatted like <code>(labelName)</code>. They will be useful later. Note that this is something that you don&#39;t have to put an <code>@</code> before.</p>
+
+<h2>Jumps</h2>
+
+<p>Jumps are used to go to a label as shown before. They can go back or forward in code. There are two types of jumps, unconditional and conditional.</p>
+
+<h3>Unconditional Jumps</h3>
+
+<p>As the name says, these will jump to the label no matter what. 
+They are declared with <code>JMP</code>. Here is an example
+```
+(toJumpTo)
+@toJumpTo //we put the label instead of a memory address and this shows where to jump
+0;JMP// put a 0 followed by ;JMP to jump</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+The basic format is:
+
+</code></pre></div>
+<p>@labelToJumpTo
+0;JMP
+```</p>
+
+<p>These are useful to go back to the start of a loop.</p>
+
+<h3>Conditional Jumps</h3>
+
+<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code>JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
+
+<p>| Instruction(code) | Jump Condition           | Jumps when              |
+|-------------|--------------------------|-------------------------|
+| JEQ          | Jump if Equal            | Equals 0                |
+| JNE         | Jump if Not Equal        | Doesn&#39;t Equal Zero      |
+| JGT          | Jump if Greater          | Greater than 0          |
+| JGE         | Jump if Greater or Equal | Greater or equal to 0   |
+| JLT          | Jump if Less             | Less than 0             |
+| JLE         | Jump if Less or Equal    | Less than or equal to 0 |</p>
+
+<p>There are more but this is the basics that you should need.</p>
+
+<p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&#39;s say <code>D</code> has a value of <code>12</code>. </p>
+<div class="highlight"><pre><code class="language-" data-lang="">@someLabel
+D; JLE
+</code></pre></div>
+<p>this won&#39;t jump as <code>D</code>, <code>12</code>, is not less than or equal to <code>0</code>. If we want to check if some address <code>i</code> is less than <code>100</code> we can do this:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@i
+D = M //stores the value of i at D
+@100
+D = D - A //subtracts 100 from D
+@jumpIfLess
+D;JLT // Sees if D is less than 0
+</code></pre></div>
+<p>If <code>i</code> is less than <code>100</code> and we subtract <code>100</code> away, it would be negative. So we want to jump if the <code>D</code> is negative which is the same as less than <code>0</code>. We can just change <code>JLT</code> to <code>JGT</code> if we want to jump if <code>i</code> is greater than <code>100</code>.</p>
+
+<p>If the condition is not met it continues down the code as normal.</p>
+
+<p>You can use any of these jumps and if you want to learn more jumps you can see them <a href="https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html">here</a> or <a href="http://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm">here</a>.</p>
+
+<h2>Loops</h2>
+
+<p>To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met. </p>
+<div class="highlight"><pre><code class="language-" data-lang="">int sum = 0;
+for(int i = 1; i &lt;= 100; i++){
+    sum += i;
+}
+return sum;
+</code></pre></div>
+<p>This adds all of the numbers from 1 to 100</p>
+
+<p>The equivalent of this in assembly is as follows</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@i
+M = 1 //Sets i to 1
+@sum
+M = 0 //sets our sum to 0
+
+(LOOP) // label for the start of the loop
+    @i
+    D = M //stores the value of i to D
+    @100
+    D = D - A // subtracts off 100 from D
+    @END // Label of the end of the loop
+    D;JGT // if i - 100 is positive we need to end the loop
+    @i
+    D = M //restores the value of i to D
+    @sum
+    M = M + D // adds the value of i to D
+    @i
+    M = M + 1 //increases the value of i by 1
+    @LOOP
+    0;JMP //jumps back to the start of the loop
+(END) // Our label for the end
+@END
+0;JMP //Infinite loop to end the program
+</code></pre></div>
+<p>We have to store the value of <code>i</code> to <code>D</code> whenever we want to add to <code>sum</code> because we can&#39;t just do 
+<code>
+@sum
+M = M + i
+</code>
+because <code>i</code> is an address not a value so you have to store it in <code>D</code>. You have to do this whenever you want to interact with two different addresses.</p>
+
+<p>Note the infinite loop at the end. This means that the program is done.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">(ENDPROGRAM)
+@ENDPROGRAM
+0;JMP
+</code></pre></div>
+<p>Just copy this to the last line of your code and the CPU will stop running.</p>
+
+<h2>Cheatsheet</h2>
+
+<p>I found that editing the while loop helped a lot for Mult so here it is without the comments.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+@i
+M = 1
+@sum
+M = 0
+
+(LOOP)
+    @i
+    D = M
+    @100
+    D = D - A
+    @END
+    D;JGT
+    @i
+    D = M
+    @sum
+    M = M + D
+    @i
+    M = M + 1
+    @LOOP
+    0;JMP
+(END)
+@End
+0;JMP
+
+</code></pre></div>
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">iblacksand</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>iblacksand</li>
+          <li><a href="mailto:"></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/iblacksand"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">iblacksand</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
