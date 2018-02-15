@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="iblacksand">
+        <meta property="og:title" content="iblacksand">
+        <meta property="og:url" content="https://iblacksand.github.io/post/project4/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="" />
+        <meta property="og:article:published_time" content="2017-02-01T08:52:46-07:00" />
+    
+        <meta name="generator" content="Hugo 0.16" />
+        <title>Project 4 &middot; iblacksand </title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="canonical" href="https://iblacksand.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://iblacksand.github.io/css/main.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://iblacksand.github.io/" alt="iblacksand"><h1 class="blog-title heading">iblacksand</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">Project 4</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>Project 4 has two files, <code>Mult.asm</code> and <code>Fill.asm</code>.</p>
+
+<h2 id="mult">Mult</h2>
+
+<p><code>Mult.asm</code> is multiplication. You have to do <code>R0 * R1</code> and put that in <code>R2</code>. It is important to note to get the value at <code>R0</code> you would do</p>
+
+<pre><code>@0
+D = M //stores R0 at D
+</code></pre>
+
+<p>The memory address is not <code>R0</code> but <code>0</code>.  Remember that you have to put an infinite loop at the end to say that the program is finished. It shouldn&rsquo;t be too difficult.</p>
+
+<h2 id="fill">Fill</h2>
+
+<p>Fill is supposed to fill the screen with black when a key is pressed.  A block of 16 pixels is consider a <strong>word</strong>. <code>@SCREEN</code> is the position of the first word of the screen. If a pixel holds a value of <code>1</code> this will make the pixel black. Otherwise it is white.If you assign a word to have a value of <code>-1</code>, which is <code>1111111111111111</code> in binary, it will turn the first 16 pixels black.</p>
+
+<pre><code>@SCREEN
+M = -1 // this is referencing the first word
+(END)
+@END
+0;JMP
+</code></pre>
+
+<p>This will make the first 16 pixels black and is a good test script to make sure you that you have the write steps to run your program.</p>
+
+<p>The screen has 32 words in each row and has a total of 256 rows meaning that there are 8192 words in total. The easiest way to go at this is assigning each of these words with a value of <code>-1</code>. Start with <code>@SCREEN</code></p>
+
+<p>To tell if you need to fill the screen, you have to tell if key is pressed. This is as simple as getting the value at the keyboard address which is <code>@24576</code>. If the value doesn&rsquo;t equal zero at that memory position then a key is currently pressed.</p>
+
+<pre><code>@24576 // memory address of the keyboard.
+D = M
+</code></pre>
+
+<p>D has the value of the key being pressed. It is 0 if no key is pressed.</p>
+
+<p><em>All of this is given in the book. I wanted to make it easier for people to get what it is saying.</em></p>
+
+<h2 id="testing-and-compiling">Testing and Compiling</h2>
+
+<p>To compile your <code>*.asm</code> file, run <code>assembler.bat</code> or <code>.sh</code> and then click load source file on the very left. If you press the blue arrows it will compile it slowly so to get it done quickly press the while paper with numbers on it(directly left of the equals sign). The save icon next to the open file should turn blue and you can click on it and save the <code>.hack</code> file.</p>
+
+<p>Next run <code>CPUEmulator.bat</code> or <code>.sh</code>. For <code>Mult</code> you can click on the script button, the same as in HardwareSimulator, and run the test file and you got your result. For <code>Fill</code> you will have to press the open file on the very left and open <code>Fill.hack</code> in the <code>/Fill</code> folder. Next on the right, set animations to no animations. Then set view to screen. Click on the keyboard button on the bottom and then you can press any key, other than ctrl and some modifier buttons, and see the results. An error of <code>At line 32XXX: Can't continue past last line</code> usually means that you forgot  to end the program with an infinite loop.</p>
+
+<p><em>It is important to note that sometimes the assembler might bug out with overwriting so you might want to delete the <code>.hack</code> file and then save</em></p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            
+            <p class="f-post-time"><time datetime="2017-02-01T08:52:46-07:00">February 1, 2017</time></p>
+        </section>
+                        
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Project%204&url=https%3a%2f%2fiblacksand.github.io%2fpost%2fproject4%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fiblacksand.github.io%2fpost%2fproject4%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fiblacksand.github.io%2fpost%2fproject4%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+        </section>
+                        
+    </footer>
+</article>
+	</div>
+</main>
+<footer id="site-footer">
+    <div class="container">
+        <a href="https://iblacksand.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+        <section>&copy; <a href="https://iblacksand.github.io/"></a> 2016 | All rights reserved</section>
+        
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://iblacksand.github.io/js/fittext.js"></script>
+<script type="text/javascript">
+    $(".heading").fitText();
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</body>
+</html>
