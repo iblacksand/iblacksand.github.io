@@ -6,13 +6,13 @@ title: "Assembly Cheatsheet"
 
 Every assembly action must start with an `@` which is to followed by a memory address or [label](#labels) and then followed by code to modify something. For example, `@1` references the address `1` and you can access the address with `A` or the value stored at the memory slot  with `M` and use `D` to keep track of values that you want to use later on.
 
-```
+```assembly
 @100
 D = A // A is address which is 100
 ```
 
 What this does is stores the address to `D`, and since we called the address of `100`, `D` has a value of `100`. If we want to assign a spot in memory, `i`, with a value of `2220` we can simply do this
-```
+```assembly
 @2220
 D = A // first we have to assign D with the value of 2220
 @i 
@@ -26,7 +26,7 @@ Address names don't have to be capitalized, but to be safe, capitalize `M`, `A` 
 ## Labels
 
 Labels are spots in code that are used to tell where to jump to. [Jumps](#Jumps) are mentioned later on but here is an example
-```
+```assembly
 (startLoop) //this is the label
 @startLoop
 0;JMP // this is a jump that will go to the label startLoop
@@ -42,7 +42,8 @@ Jumps are used to go to a label as shown before. They can go back or forward in 
 
 As the name says, these will jump to the label no matter what. 
 They are declared with `JMP`. Here is an example
-```
+
+```assembly
 (toJumpTo)
 @toJumpTo //we put the label instead of a memory address and this shows where to jump
 0;JMP// put a 0 followed by ;JMP to jump
@@ -51,7 +52,7 @@ They are declared with `JMP`. Here is an example
 
 The basic format is:
 
-```
+```assembly
 @labelToJumpTo
 0;JMP
 ```
@@ -75,13 +76,13 @@ There are more but this is the basics that you should need.
 
 Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let's say `D` has a value of `12`. 
 
-```
+```assembly
 @someLabel
 D; JLE
 ```
 this won't jump as `D`, `12`, is not less than or equal to `0`. If we want to check if some address `i` is less than `100` we can do this:
 
-```
+```assembly
 @i
 D = M //stores the value of i at D
 @100
@@ -100,7 +101,7 @@ You can use any of these jumps and if you want to learn more jumps you can see t
 
 To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met. 
 
-```
+```assembly
 int sum = 0;
 for(int i = 1; i <= 100; i++){
 	sum += i;
@@ -111,7 +112,7 @@ This adds all of the numbers from 1 to 100
 
 The equivalent of this in assembly is as follows
 
-```
+```assembly
 @i
 M = 1 //Sets i to 1
 @sum
@@ -127,7 +128,7 @@ M = 0 //sets our sum to 0
 	@i
 	D = M //restores the value of i to D
 	@sum
-	M = M + D // adds the value of i to D
+	M = M + D // adds the value of i to sum
 	@i
 	M = M + 1 //increases the value of i by 1
 	@LOOP
@@ -138,7 +139,7 @@ M = 0 //sets our sum to 0
 ```
 
 We have to store the value of `i` to `D` whenever we want to add to `sum` because we can't just do 
-```
+```assembly
 @sum
 M = M + i
 ```
@@ -146,7 +147,7 @@ because `i` is an address not a value so you have to store it in `D`. You have t
 
 Note the infinite loop at the end. This means that the program is done.
 
-```
+```assembly
 (ENDPROGRAM)
 @ENDPROGRAM
 0;JMP
@@ -158,7 +159,7 @@ Just copy this to the last line of your code and the CPU will stop running.
 
 I found that editing the while loop helped a lot for Mult so here it is without the comments.
 
-```
+```asm
 
 @i
 M = 1

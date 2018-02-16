@@ -6,8 +6,8 @@
 </description>
     <link>https://iblacksand.github.io/</link>
     <atom:link href="https://iblacksand.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Feb 2018 18:21:22 -0700</pubDate>
-    <lastBuildDate>Thu, 15 Feb 2018 18:21:22 -0700</lastBuildDate>
+    <pubDate>Fri, 16 Feb 2018 10:35:42 -0700</pubDate>
+    <lastBuildDate>Fri, 16 Feb 2018 10:35:42 -0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -102,13 +102,12 @@ D = M
         <title>Assembly Cheatsheet</title>
         <description>&lt;p&gt;Every assembly action must start with an &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; which is to followed by a memory address or &lt;a href=&quot;#labels&quot;&gt;label&lt;/a&gt; and then followed by code to modify something. For example, &lt;code class=&quot;highlighter-rouge&quot;&gt;@1&lt;/code&gt; references the address &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; and you can access the address with &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; or the value stored at the memory slot  with &lt;code class=&quot;highlighter-rouge&quot;&gt;M&lt;/code&gt; and use &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt; to keep track of values that you want to use later on.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@100
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;@100
 D = A // A is address which is 100
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;What this does is stores the address to &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt;, and since we called the address of &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt; has a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt;. If we want to assign a spot in memory, &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;, with a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;2220&lt;/code&gt; we can simply do this&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;assembly
 @2220
 D = A // first we have to assign D with the value of 2220
 @i 
@@ -122,7 +121,7 @@ M = D // M is the value held at that memory point.
 &lt;h2 id=&quot;labels&quot;&gt;Labels&lt;/h2&gt;
 
 &lt;p&gt;Labels are spots in code that are used to tell where to jump to. &lt;a href=&quot;#Jumps&quot;&gt;Jumps&lt;/a&gt; are mentioned later on but here is an example&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;assembly
 (startLoop) //this is the label
 @startLoop
 0;JMP // this is a jump that will go to the label startLoop
@@ -137,20 +136,19 @@ M = D // M is the value held at that memory point.
 &lt;h3 id=&quot;unconditional-jumps&quot;&gt;Unconditional Jumps&lt;/h3&gt;
 
 &lt;p&gt;As the name says, these will jump to the label no matter what. &lt;br /&gt;
-They are declared with &lt;code class=&quot;highlighter-rouge&quot;&gt;JMP&lt;/code&gt;. Here is an example&lt;br /&gt;
-```&lt;br /&gt;
-(toJumpTo)&lt;br /&gt;
-@toJumpTo //we put the label instead of a memory address and this shows where to jump&lt;br /&gt;
-0;JMP// put a 0 followed by ;JMP to jump&lt;/p&gt;
+They are declared with &lt;code class=&quot;highlighter-rouge&quot;&gt;JMP&lt;/code&gt;. Here is an example&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-The basic format is:
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;(toJumpTo)
+@toJumpTo //we put the label instead of a memory address and this shows where to jump
+0;JMP// put a 0 followed by ;JMP to jump
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;@labelToJumpTo&lt;br /&gt;
-0;JMP&lt;br /&gt;
-```&lt;/p&gt;
+
+&lt;p&gt;The basic format is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;@labelToJumpTo
+0;JMP
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;These are useful to go back to the start of a loop.&lt;/p&gt;
 
@@ -204,20 +202,18 @@ The basic format is:
 
 &lt;p&gt;Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let’s say &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt; has a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;12&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@someLabel
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;@someLabel
 D; JLE
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 &lt;p&gt;this won’t jump as &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;12&lt;/code&gt;, is not less than or equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;. If we want to check if some address &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is less than &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt; we can do this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@i
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;@i
 D = M //stores the value of i at D
 @100
 D = D - A //subtracts 100 from D
 @jumpIfLess
 D;JLT // Sees if D is less than 0
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is less than &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt; and we subtract &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt; away, it would be negative. So we want to jump if the &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt; is negative which is the same as less than &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;. We can just change &lt;code class=&quot;highlighter-rouge&quot;&gt;JLT&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;JGT&lt;/code&gt; if we want to jump if &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is greater than &lt;code class=&quot;highlighter-rouge&quot;&gt;100&lt;/code&gt;.&lt;/p&gt;
 
@@ -229,18 +225,17 @@ D;JLT // Sees if D is less than 0
 
 &lt;p&gt;To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int sum = 0;
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;int sum = 0;
 for(int i = 1; i &amp;lt;= 100; i++){
 	sum += i;
 }
 return sum;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 &lt;p&gt;This adds all of the numbers from 1 to 100&lt;/p&gt;
 
 &lt;p&gt;The equivalent of this in assembly is as follows&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@i
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;@i
 M = 1 //Sets i to 1
 @sum
 M = 0 //sets our sum to 0
@@ -255,7 +250,7 @@ M = 0 //sets our sum to 0
 	@i
 	D = M //restores the value of i to D
 	@sum
-	M = M + D // adds the value of i to D
+	M = M + D // adds the value of i to sum
 	@i
 	M = M + 1 //increases the value of i by 1
 	@LOOP
@@ -264,10 +259,9 @@ M = 0 //sets our sum to 0
 @END
 0;JMP //Infinite loop to end the program
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;We have to store the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt; whenever we want to add to &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; because we can’t just do &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;assembly
 @sum
 M = M + i
 &lt;/code&gt;&lt;br /&gt;
@@ -275,11 +269,10 @@ because &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is an add
 
 &lt;p&gt;Note the infinite loop at the end. This means that the program is done.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ENDPROGRAM)
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;(ENDPROGRAM)
 @ENDPROGRAM
 0;JMP
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;Just copy this to the last line of your code and the CPU will stop running.&lt;/p&gt;
 
@@ -287,7 +280,7 @@ because &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is an add
 
 &lt;p&gt;I found that editing the while loop helped a lot for Mult so here it is without the comments.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;pre&gt;&lt;code class=&quot;language-asm&quot;&gt;
 @i
 M = 1
 @sum
@@ -313,7 +306,6 @@ M = 0
 0;JMP
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 </description>
         <pubDate>Mon, 30 Jan 2017 00:00:00 -0700</pubDate>
         <link>https://iblacksand.github.io/2017/01/30/Cheatsheet.html</link>
