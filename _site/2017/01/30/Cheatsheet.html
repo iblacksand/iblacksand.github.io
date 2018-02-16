@@ -10,8 +10,8 @@
   <meta name="description" content="Every assembly action must start with an @ which is to followed by a memory address or label and then followed by code to modify something. For example, @1 r...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/2017/01/30/Cheatsheet.html">
-  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://yourdomain.com/feed.xml">
+  <link rel="canonical" href="https://iblacksand.github.io/2017/01/30/Cheatsheet.html">
+  <link rel="alternate" type="application/rss+xml" title="iblacksand" href="https://iblacksand.github.io/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">Your awesome title</a>
+    <a class="site-title" href="/">iblacksand</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -58,221 +58,167 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Every assembly action must start with an <code class="highlighter-rouge">@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code class="highlighter-rouge">@1</code> references the address <code class="highlighter-rouge">1</code> and you can access the address with <code class="highlighter-rouge">A</code> or the value stored at the memory slot  with <code class="highlighter-rouge">M</code> and use <code class="highlighter-rouge">D</code> to keep track of values that you want to use later on.</p>
-
-<p><code class="highlighter-rouge">
-@100
+    <p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@100
 D = A // A is address which is 100
-</code></p>
-
-<p>What this does is stores the address to <code class="highlighter-rouge">D</code>, and since we called the address of <code class="highlighter-rouge">100</code>, <code class="highlighter-rouge">D</code> has a value of <code class="highlighter-rouge">100</code>. If we want to assign a spot in memory, <code class="highlighter-rouge">i</code>, with a value of <code class="highlighter-rouge">2220</code> we can simply do this
-<code class="highlighter-rouge">
+</code></pre></div>
+<p>What this does is stores the address to <code>D</code>, and since we called the address of <code>100</code>, <code>D</code> has a value of <code>100</code>. If we want to assign a spot in memory, <code>i</code>, with a value of <code>2220</code> we can simply do this
+<code>
 @2220
 D = A // first we have to assign D with the value of 2220
 @i 
 M = D // M is the value held at that memory point.
 </code></p>
 
-<p><code class="highlighter-rouge">i</code> is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address.</p>
+<p><code>i</code> is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address. </p>
 
-<p>Address names don’t have to be capitalized, but to be safe, capitalize <code class="highlighter-rouge">M</code>, <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">D</code>.</p>
+<p>Address names don&#39;t have to be capitalized, but to be safe, capitalize <code>M</code>, <code>A</code> and <code>D</code>.</p>
 
-<h2 id="labels">Labels</h2>
+<h2>Labels</h2>
 
 <p>Labels are spots in code that are used to tell where to jump to. <a href="#Jumps">Jumps</a> are mentioned later on but here is an example
-<code class="highlighter-rouge">
+<code>
 (startLoop) //this is the label
 @startLoop
 0;JMP // this is a jump that will go to the label startLoop
 </code></p>
 
-<p>As you can see labels are formatted like <code class="highlighter-rouge">(labelName)</code>. They will be useful later. Note that this is something that you don’t have to put an <code class="highlighter-rouge">@</code> before.</p>
+<p>As you can see labels are formatted like <code>(labelName)</code>. They will be useful later. Note that this is something that you don&#39;t have to put an <code>@</code> before.</p>
 
-<h2 id="jumps">Jumps</h2>
+<h2>Jumps</h2>
 
 <p>Jumps are used to go to a label as shown before. They can go back or forward in code. There are two types of jumps, unconditional and conditional.</p>
 
-<h3 id="unconditional-jumps">Unconditional Jumps</h3>
+<h3>Unconditional Jumps</h3>
 
 <p>As the name says, these will jump to the label no matter what. 
-They are declared with <code class="highlighter-rouge">JMP</code>. Here is an example
+They are declared with <code>JMP</code>. Here is an example
 ```
 (toJumpTo)
 @toJumpTo //we put the label instead of a memory address and this shows where to jump
 0;JMP// put a 0 followed by ;JMP to jump</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+The basic format is:
 
-<p>```</p>
-
-<p>The basic format is:</p>
-
-<p><code class="highlighter-rouge">
-@labelToJumpTo
+</code></pre></div>
+<p>@labelToJumpTo
 0;JMP
-</code></p>
+```</p>
 
 <p>These are useful to go back to the start of a loop.</p>
 
-<h3 id="conditional-jumps">Conditional Jumps</h3>
+<h3>Conditional Jumps</h3>
 
-<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code class="highlighter-rouge">JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
+<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code>JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Instruction(code)</th>
-      <th>Jump Condition</th>
-      <th>Jumps when</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>JEQ</td>
-      <td>Jump if Equal</td>
-      <td>Equals 0</td>
-    </tr>
-    <tr>
-      <td>JNE</td>
-      <td>Jump if Not Equal</td>
-      <td>Doesn’t Equal Zero</td>
-    </tr>
-    <tr>
-      <td>JGT</td>
-      <td>Jump if Greater</td>
-      <td>Greater than 0</td>
-    </tr>
-    <tr>
-      <td>JGE</td>
-      <td>Jump if Greater or Equal</td>
-      <td>Greater or equal to 0</td>
-    </tr>
-    <tr>
-      <td>JLT</td>
-      <td>Jump if Less</td>
-      <td>Less than 0</td>
-    </tr>
-    <tr>
-      <td>JLE</td>
-      <td>Jump if Less or Equal</td>
-      <td>Less than or equal to 0</td>
-    </tr>
-  </tbody>
-</table>
+<p>| Instruction(code) | Jump Condition           | Jumps when              |
+|-------------|--------------------------|-------------------------|
+| JEQ          | Jump if Equal            | Equals 0                |
+| JNE         | Jump if Not Equal        | Doesn&#39;t Equal Zero      |
+| JGT          | Jump if Greater          | Greater than 0          |
+| JGE         | Jump if Greater or Equal | Greater or equal to 0   |
+| JLT          | Jump if Less             | Less than 0             |
+| JLE         | Jump if Less or Equal    | Less than or equal to 0 |</p>
 
 <p>There are more but this is the basics that you should need.</p>
 
-<p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let’s say <code class="highlighter-rouge">D</code> has a value of <code class="highlighter-rouge">12</code>.</p>
-
-<p><code class="highlighter-rouge">
-@someLabel
+<p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&#39;s say <code>D</code> has a value of <code>12</code>. </p>
+<div class="highlight"><pre><code class="language-" data-lang="">@someLabel
 D; JLE
-</code>
-this won’t jump as <code class="highlighter-rouge">D</code>, <code class="highlighter-rouge">12</code>, is not less than or equal to <code class="highlighter-rouge">0</code>. If we want to check if some address <code class="highlighter-rouge">i</code> is less than <code class="highlighter-rouge">100</code> we can do this:</p>
-
-<p><code class="highlighter-rouge">
-@i
+</code></pre></div>
+<p>this won&#39;t jump as <code>D</code>, <code>12</code>, is not less than or equal to <code>0</code>. If we want to check if some address <code>i</code> is less than <code>100</code> we can do this:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@i
 D = M //stores the value of i at D
 @100
 D = D - A //subtracts 100 from D
 @jumpIfLess
 D;JLT // Sees if D is less than 0
-</code></p>
-
-<p>If <code class="highlighter-rouge">i</code> is less than <code class="highlighter-rouge">100</code> and we subtract <code class="highlighter-rouge">100</code> away, it would be negative. So we want to jump if the <code class="highlighter-rouge">D</code> is negative which is the same as less than <code class="highlighter-rouge">0</code>. We can just change <code class="highlighter-rouge">JLT</code> to <code class="highlighter-rouge">JGT</code> if we want to jump if <code class="highlighter-rouge">i</code> is greater than <code class="highlighter-rouge">100</code>.</p>
+</code></pre></div>
+<p>If <code>i</code> is less than <code>100</code> and we subtract <code>100</code> away, it would be negative. So we want to jump if the <code>D</code> is negative which is the same as less than <code>0</code>. We can just change <code>JLT</code> to <code>JGT</code> if we want to jump if <code>i</code> is greater than <code>100</code>.</p>
 
 <p>If the condition is not met it continues down the code as normal.</p>
 
 <p>You can use any of these jumps and if you want to learn more jumps you can see them <a href="https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html">here</a> or <a href="http://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm">here</a>.</p>
 
-<h2 id="loops">Loops</h2>
+<h2>Loops</h2>
 
-<p>To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met.</p>
-
-<p><code class="highlighter-rouge">
-int sum = 0;
+<p>To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met. </p>
+<div class="highlight"><pre><code class="language-" data-lang="">int sum = 0;
 for(int i = 1; i &lt;= 100; i++){
-	sum += i;
+    sum += i;
 }
 return sum;
-</code>
-This adds all of the numbers from 1 to 100</p>
+</code></pre></div>
+<p>This adds all of the numbers from 1 to 100</p>
 
 <p>The equivalent of this in assembly is as follows</p>
-
-<p>```
-@i
+<div class="highlight"><pre><code class="language-" data-lang="">@i
 M = 1 //Sets i to 1
 @sum
-M = 0 //sets our sum to 0</p>
+M = 0 //sets our sum to 0
 
-<p>(LOOP) // label for the start of the loop
-	@i
-	D = M //stores the value of i to D
-	@100
-	D = D - A // subtracts off 100 from D
-	@END // Label of the end of the loop
-	D;JGT // if i - 100 is positive we need to end the loop
-	@i
-	D = M //restores the value of i to D
-	@sum
-	M = M + D // adds the value of i to D
-	@i
-	M = M + 1 //increases the value of i by 1
-	@LOOP
-	0;JMP //jumps back to the start of the loop
+(LOOP) // label for the start of the loop
+    @i
+    D = M //stores the value of i to D
+    @100
+    D = D - A // subtracts off 100 from D
+    @END // Label of the end of the loop
+    D;JGT // if i - 100 is positive we need to end the loop
+    @i
+    D = M //restores the value of i to D
+    @sum
+    M = M + D // adds the value of i to D
+    @i
+    M = M + 1 //increases the value of i by 1
+    @LOOP
+    0;JMP //jumps back to the start of the loop
 (END) // Our label for the end
 @END
 0;JMP //Infinite loop to end the program
-```</p>
-
-<p>We have to store the value of <code class="highlighter-rouge">i</code> to <code class="highlighter-rouge">D</code> whenever we want to add to <code class="highlighter-rouge">sum</code> because we can’t just do 
-<code class="highlighter-rouge">
+</code></pre></div>
+<p>We have to store the value of <code>i</code> to <code>D</code> whenever we want to add to <code>sum</code> because we can&#39;t just do 
+<code>
 @sum
 M = M + i
 </code>
-because <code class="highlighter-rouge">i</code> is an address not a value so you have to store it in <code class="highlighter-rouge">D</code>. You have to do this whenever you want to interact with two different addresses.</p>
+because <code>i</code> is an address not a value so you have to store it in <code>D</code>. You have to do this whenever you want to interact with two different addresses.</p>
 
 <p>Note the infinite loop at the end. This means that the program is done.</p>
-
-<p><code class="highlighter-rouge">
-(ENDPROGRAM)
+<div class="highlight"><pre><code class="language-" data-lang="">(ENDPROGRAM)
 @ENDPROGRAM
 0;JMP
-</code></p>
-
+</code></pre></div>
 <p>Just copy this to the last line of your code and the CPU will stop running.</p>
 
-<h2 id="cheatsheet">Cheatsheet</h2>
+<h2>Cheatsheet</h2>
 
 <p>I found that editing the while loop helped a lot for Mult so here it is without the comments.</p>
-
-<p>```</p>
-
-<p>@i
+<div class="highlight"><pre><code class="language-" data-lang="">
+@i
 M = 1
 @sum
-M = 0</p>
+M = 0
 
-<p>(LOOP)
-	@i
-	D = M
-	@100
-	D = D - A
-	@END
-	D;JGT
-	@i
-	D = M
-	@sum
-	M = M + D
-	@i
-	M = M + 1
-	@LOOP
-	0;JMP
+(LOOP)
+    @i
+    D = M
+    @100
+    D = D - A
+    @END
+    D;JGT
+    @i
+    D = M
+    @sum
+    M = M + D
+    @i
+    M = M + 1
+    @LOOP
+    0;JMP
 (END)
 @End
-0;JMP</p>
+0;JMP
 
-<p>```</p>
-
+</code></pre></div>
   </div>
 
 </article>
@@ -284,13 +230,13 @@ M = 0</p>
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Your awesome title</h2>
+    <h2 class="footer-heading">iblacksand</h2>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>Your awesome title</li>
-          <li><a href="mailto:your-email@domain.com">your-email@domain.com</a></li>
+          <li>iblacksand</li>
+          <li><a href="mailto:"></a></li>
         </ul>
       </div>
 
@@ -298,24 +244,18 @@ M = 0</p>
         <ul class="social-media-list">
           
           <li>
-            <a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">jekyll</span></a>
+            <a href="https://github.com/iblacksand"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">iblacksand</span></a>
 
           </li>
           
 
-          
-          <li>
-            <a href="https://twitter.com/jekyllrb"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">jekyllrb</span></a>
-
-          </li>
           
         </ul>
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+        <p>empty
 </p>
       </div>
     </div>
