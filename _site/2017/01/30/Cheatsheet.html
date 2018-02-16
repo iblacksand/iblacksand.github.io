@@ -58,167 +58,221 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Every assembly action must start with an <code>@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code>@1</code> references the address <code>1</code> and you can access the address with <code>A</code> or the value stored at the memory slot  with <code>M</code> and use <code>D</code> to keep track of values that you want to use later on.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@100
+    <p>Every assembly action must start with an <code class="highlighter-rouge">@</code> which is to followed by a memory address or <a href="#labels">label</a> and then followed by code to modify something. For example, <code class="highlighter-rouge">@1</code> references the address <code class="highlighter-rouge">1</code> and you can access the address with <code class="highlighter-rouge">A</code> or the value stored at the memory slot  with <code class="highlighter-rouge">M</code> and use <code class="highlighter-rouge">D</code> to keep track of values that you want to use later on.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@100
 D = A // A is address which is 100
-</code></pre></div>
-<p>What this does is stores the address to <code>D</code>, and since we called the address of <code>100</code>, <code>D</code> has a value of <code>100</code>. If we want to assign a spot in memory, <code>i</code>, with a value of <code>2220</code> we can simply do this
-<code>
+</code></pre>
+</div>
+
+<p>What this does is stores the address to <code class="highlighter-rouge">D</code>, and since we called the address of <code class="highlighter-rouge">100</code>, <code class="highlighter-rouge">D</code> has a value of <code class="highlighter-rouge">100</code>. If we want to assign a spot in memory, <code class="highlighter-rouge">i</code>, with a value of <code class="highlighter-rouge">2220</code> we can simply do this<br />
+<code class="highlighter-rouge">
 @2220
 D = A // first we have to assign D with the value of 2220
 @i 
 M = D // M is the value held at that memory point.
 </code></p>
 
-<p><code>i</code> is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address. </p>
+<p><code class="highlighter-rouge">i</code> is some random address in memory but for some things, like the keyboard, you will have to use a numerical value for the address.</p>
 
-<p>Address names don&#39;t have to be capitalized, but to be safe, capitalize <code>M</code>, <code>A</code> and <code>D</code>.</p>
+<p>Address names don’t have to be capitalized, but to be safe, capitalize <code class="highlighter-rouge">M</code>, <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">D</code>.</p>
 
-<h2>Labels</h2>
+<h2 id="labels">Labels</h2>
 
-<p>Labels are spots in code that are used to tell where to jump to. <a href="#Jumps">Jumps</a> are mentioned later on but here is an example
-<code>
+<p>Labels are spots in code that are used to tell where to jump to. <a href="#Jumps">Jumps</a> are mentioned later on but here is an example<br />
+<code class="highlighter-rouge">
 (startLoop) //this is the label
 @startLoop
 0;JMP // this is a jump that will go to the label startLoop
 </code></p>
 
-<p>As you can see labels are formatted like <code>(labelName)</code>. They will be useful later. Note that this is something that you don&#39;t have to put an <code>@</code> before.</p>
+<p>As you can see labels are formatted like <code class="highlighter-rouge">(labelName)</code>. They will be useful later. Note that this is something that you don’t have to put an <code class="highlighter-rouge">@</code> before.</p>
 
-<h2>Jumps</h2>
+<h2 id="jumps">Jumps</h2>
 
 <p>Jumps are used to go to a label as shown before. They can go back or forward in code. There are two types of jumps, unconditional and conditional.</p>
 
-<h3>Unconditional Jumps</h3>
+<h3 id="unconditional-jumps">Unconditional Jumps</h3>
 
-<p>As the name says, these will jump to the label no matter what. 
-They are declared with <code>JMP</code>. Here is an example
-```
-(toJumpTo)
-@toJumpTo //we put the label instead of a memory address and this shows where to jump
+<p>As the name says, these will jump to the label no matter what. <br />
+They are declared with <code class="highlighter-rouge">JMP</code>. Here is an example<br />
+```<br />
+(toJumpTo)<br />
+@toJumpTo //we put the label instead of a memory address and this shows where to jump<br />
 0;JMP// put a 0 followed by ;JMP to jump</p>
-<div class="highlight"><pre><code class="language-" data-lang="">
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
 The basic format is:
 
-</code></pre></div>
-<p>@labelToJumpTo
-0;JMP
+</code></pre>
+</div>
+<p>@labelToJumpTo<br />
+0;JMP<br />
 ```</p>
 
 <p>These are useful to go back to the start of a loop.</p>
 
-<h3>Conditional Jumps</h3>
+<h3 id="conditional-jumps">Conditional Jumps</h3>
 
-<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code>JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
+<p>Conditional jumps will only jump to the label if a condition is met. Instead of <code class="highlighter-rouge">JMP</code> you would use different letters for different conditions. The chart below shows the different types of conditions.</p>
 
-<p>| Instruction(code) | Jump Condition           | Jumps when              |
-|-------------|--------------------------|-------------------------|
-| JEQ          | Jump if Equal            | Equals 0                |
-| JNE         | Jump if Not Equal        | Doesn&#39;t Equal Zero      |
-| JGT          | Jump if Greater          | Greater than 0          |
-| JGE         | Jump if Greater or Equal | Greater or equal to 0   |
-| JLT          | Jump if Less             | Less than 0             |
-| JLE         | Jump if Less or Equal    | Less than or equal to 0 |</p>
+<table>
+  <thead>
+    <tr>
+      <th>Instruction(code)</th>
+      <th>Jump Condition</th>
+      <th>Jumps when</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>JEQ</td>
+      <td>Jump if Equal</td>
+      <td>Equals 0</td>
+    </tr>
+    <tr>
+      <td>JNE</td>
+      <td>Jump if Not Equal</td>
+      <td>Doesn’t Equal Zero</td>
+    </tr>
+    <tr>
+      <td>JGT</td>
+      <td>Jump if Greater</td>
+      <td>Greater than 0</td>
+    </tr>
+    <tr>
+      <td>JGE</td>
+      <td>Jump if Greater or Equal</td>
+      <td>Greater or equal to 0</td>
+    </tr>
+    <tr>
+      <td>JLT</td>
+      <td>Jump if Less</td>
+      <td>Less than 0</td>
+    </tr>
+    <tr>
+      <td>JLE</td>
+      <td>Jump if Less or Equal</td>
+      <td>Less than or equal to 0</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>There are more but this is the basics that you should need.</p>
 
-<p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let&#39;s say <code>D</code> has a value of <code>12</code>. </p>
-<div class="highlight"><pre><code class="language-" data-lang="">@someLabel
+<p>Notice that these all compare to zero. The value we compare with is the value before the semicolon. Let’s say <code class="highlighter-rouge">D</code> has a value of <code class="highlighter-rouge">12</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@someLabel
 D; JLE
-</code></pre></div>
-<p>this won&#39;t jump as <code>D</code>, <code>12</code>, is not less than or equal to <code>0</code>. If we want to check if some address <code>i</code> is less than <code>100</code> we can do this:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@i
+</code></pre>
+</div>
+<p>this won’t jump as <code class="highlighter-rouge">D</code>, <code class="highlighter-rouge">12</code>, is not less than or equal to <code class="highlighter-rouge">0</code>. If we want to check if some address <code class="highlighter-rouge">i</code> is less than <code class="highlighter-rouge">100</code> we can do this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@i
 D = M //stores the value of i at D
 @100
 D = D - A //subtracts 100 from D
 @jumpIfLess
 D;JLT // Sees if D is less than 0
-</code></pre></div>
-<p>If <code>i</code> is less than <code>100</code> and we subtract <code>100</code> away, it would be negative. So we want to jump if the <code>D</code> is negative which is the same as less than <code>0</code>. We can just change <code>JLT</code> to <code>JGT</code> if we want to jump if <code>i</code> is greater than <code>100</code>.</p>
+</code></pre>
+</div>
+
+<p>If <code class="highlighter-rouge">i</code> is less than <code class="highlighter-rouge">100</code> and we subtract <code class="highlighter-rouge">100</code> away, it would be negative. So we want to jump if the <code class="highlighter-rouge">D</code> is negative which is the same as less than <code class="highlighter-rouge">0</code>. We can just change <code class="highlighter-rouge">JLT</code> to <code class="highlighter-rouge">JGT</code> if we want to jump if <code class="highlighter-rouge">i</code> is greater than <code class="highlighter-rouge">100</code>.</p>
 
 <p>If the condition is not met it continues down the code as normal.</p>
 
 <p>You can use any of these jumps and if you want to learn more jumps you can see them <a href="https://courses.engr.illinois.edu/ece390/books/labmanual/assembly.html">here</a> or <a href="http://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm">here</a>.</p>
 
-<h2>Loops</h2>
+<h2 id="loops">Loops</h2>
 
-<p>To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met. </p>
-<div class="highlight"><pre><code class="language-" data-lang="">int sum = 0;
+<p>To build loops, you will have a series of jumps and labels that will keep it looping till a condition is met.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>int sum = 0;
 for(int i = 1; i &lt;= 100; i++){
-    sum += i;
+	sum += i;
 }
 return sum;
-</code></pre></div>
+</code></pre>
+</div>
 <p>This adds all of the numbers from 1 to 100</p>
 
 <p>The equivalent of this in assembly is as follows</p>
-<div class="highlight"><pre><code class="language-" data-lang="">@i
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@i
 M = 1 //Sets i to 1
 @sum
 M = 0 //sets our sum to 0
 
 (LOOP) // label for the start of the loop
-    @i
-    D = M //stores the value of i to D
-    @100
-    D = D - A // subtracts off 100 from D
-    @END // Label of the end of the loop
-    D;JGT // if i - 100 is positive we need to end the loop
-    @i
-    D = M //restores the value of i to D
-    @sum
-    M = M + D // adds the value of i to D
-    @i
-    M = M + 1 //increases the value of i by 1
-    @LOOP
-    0;JMP //jumps back to the start of the loop
+	@i
+	D = M //stores the value of i to D
+	@100
+	D = D - A // subtracts off 100 from D
+	@END // Label of the end of the loop
+	D;JGT // if i - 100 is positive we need to end the loop
+	@i
+	D = M //restores the value of i to D
+	@sum
+	M = M + D // adds the value of i to D
+	@i
+	M = M + 1 //increases the value of i by 1
+	@LOOP
+	0;JMP //jumps back to the start of the loop
 (END) // Our label for the end
 @END
 0;JMP //Infinite loop to end the program
-</code></pre></div>
-<p>We have to store the value of <code>i</code> to <code>D</code> whenever we want to add to <code>sum</code> because we can&#39;t just do 
-<code>
+</code></pre>
+</div>
+
+<p>We have to store the value of <code class="highlighter-rouge">i</code> to <code class="highlighter-rouge">D</code> whenever we want to add to <code class="highlighter-rouge">sum</code> because we can’t just do <br />
+<code class="highlighter-rouge">
 @sum
 M = M + i
-</code>
-because <code>i</code> is an address not a value so you have to store it in <code>D</code>. You have to do this whenever you want to interact with two different addresses.</p>
+</code><br />
+because <code class="highlighter-rouge">i</code> is an address not a value so you have to store it in <code class="highlighter-rouge">D</code>. You have to do this whenever you want to interact with two different addresses.</p>
 
 <p>Note the infinite loop at the end. This means that the program is done.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">(ENDPROGRAM)
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(ENDPROGRAM)
 @ENDPROGRAM
 0;JMP
-</code></pre></div>
+</code></pre>
+</div>
+
 <p>Just copy this to the last line of your code and the CPU will stop running.</p>
 
-<h2>Cheatsheet</h2>
+<h2 id="cheatsheet">Cheatsheet</h2>
 
 <p>I found that editing the while loop helped a lot for Mult so here it is without the comments.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
 @i
 M = 1
 @sum
 M = 0
 
 (LOOP)
-    @i
-    D = M
-    @100
-    D = D - A
-    @END
-    D;JGT
-    @i
-    D = M
-    @sum
-    M = M + D
-    @i
-    M = M + 1
-    @LOOP
-    0;JMP
+	@i
+	D = M
+	@100
+	D = D - A
+	@END
+	D;JGT
+	@i
+	D = M
+	@sum
+	M = M + D
+	@i
+	M = M + 1
+	@LOOP
+	0;JMP
 (END)
 @End
 0;JMP
 
-</code></pre></div>
+</code></pre>
+</div>
+
   </div>
 
 </article>

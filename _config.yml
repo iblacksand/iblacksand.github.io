@@ -13,4 +13,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://iblacksand.github.io" # the base hostname & protocol for your site
 github_username:  iblacksand
 
+markdown: kramdown
+
+kramdown:
+  input: GFM
 # Build settings
