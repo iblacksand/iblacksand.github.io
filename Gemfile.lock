@@ -125,11 +125,12 @@ GEM
     mercenary (0.3.6)
     middleware (0.1.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.8.0)
     minitest (5.13.0)
     multipart-post (2.1.1)
-    nokogiri (1.10.4)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.13.3)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     octokit (4.22.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -141,6 +142,7 @@ GEM
       thor
       thread_safe
     public_suffix (4.0.6)
+    racc (1.6.0)
     rack (1.6.12)
     rack-test (0.6.3)
       rack (>= 1.0)
